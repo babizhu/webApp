@@ -1,0 +1,32 @@
+.badge {
+
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid;
+
+
+  cursor: pointer;
+
+
+  font-size: 12px;
+  //font-weight: 500;
+  height: 17px;
+
+  line-height: 15px;
+  //list-style: none outside none;
+  //min-width: 10px;
+  padding: 1px 4px 0px;
+  //
+  right: 1px;
+  //text-align: center;
+  top: -12px;
+  //vertical-align: baseline;
+  //white-space: nowrap;
+
+}
+
+.bg-warning-400 {
+  background-color: rgb(255, 112, 67);
+  border-color: white;
+  color: #fff;
+}
