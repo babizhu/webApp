@@ -15,11 +15,11 @@ $header-bgcolor: #263238;
 //}
 
 .sidebar {
-
+  background-color: $header-bgcolor;
   .sidebar-content {
     font-size: 13px;
     display: table;
-    background-color: $header-bgcolor;
+
     color: #fff;
     position: relative;
     //line-height: 2;
@@ -31,14 +31,12 @@ $header-bgcolor: #263238;
         padding-right: 20px;
         .img-circle {
           max-height: 38px;
-          // margin-top: -4px;
           border-radius: 50%;
         }
 
       }
       .media-body {
         display: table-cell;
-        vertical-align: bottom;
         width: 10000px;
         vertical-align: top;
         .text-size-mini {
@@ -53,6 +51,9 @@ $header-bgcolor: #263238;
         display: table-cell;
         padding-left: 20px;
       }
+    }
+    .subItemActive{
+      background-color: darken(#263238,5%) !important;
     }
     .active {
       background-color: #26a69a !important;
@@ -73,19 +74,12 @@ $header-bgcolor: #263238;
               top: 0;
               right: -260px;
               background-color: #26a69a;
-
-                //border-color: #26a69a;
               border-color: rgb(38, 166, 154);
               //border-right-color: rgb(38, 166, 154);
               //border-bottom-color: rgb(38, 166, 154);
               //border-left-color: rgb(38, 166, 154);
               padding: 12px 30px;
-              //padding-top: inherit;
-              //padding-right: 20px;
-              //padding-bottom: inherit;
-              //padding-left: 20px;
-              //padding-left: 20px;
-              //padding-right: 20px;
+
               width: 260px;
               text-align: left;
               color: #fff;
@@ -94,11 +88,12 @@ $header-bgcolor: #263238;
 
               &:after {
                 content: "";
-                width: 0;
-                height: 0;
-                border-right: 5px solid;
+                //width: 0;
+                //height: 0;
+
                 border-top: 5px solid transparent;
                 border-bottom: 5px solid transparent;
+                border-right: 5px solid;
                 border-right-color: inherit;
                 position: absolute;
                 left: -5px;
@@ -110,35 +105,19 @@ $header-bgcolor: #263238;
               position: absolute;
               top: 43px;
               right: -260px;
-              //background-color: #26a69a;
-              //border-color: #26a69a;
-              //border-color: rgb(38, 166, 154);
-              //border-right-color: rgb(38, 166, 154);
-              //border-bottom-color: rgb(38, 166, 154);
-              //border-left-color: rgb(38, 166, 154);
-              //padding: 5px 0px;
-              //padding-top: inherit;
-              //padding-right: 20px;
-              //padding-bottom: inherit;
-              //padding-left: 20px;
-              //padding-left: 20px;
-              //padding-right: 20px;
               width: 260px;
               text-align: left;
               //color: #fff;
-              border-bottom-right-radius: 3px;
               //border-top-right-radius: 3px;
               border-left: 1px solid rgba(255,255,255,0.1);
               border-radius: 0 0 3px 0;
               li{
                 padding: 11px 30px;
-                margin: 5px 0px;
+                margin: 5px 0;
               }
 
             }
             ul {
-              //cursor: pointer;
-              //padding: 0;
               background-color: $header-bgcolor;
               -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
               box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05);
@@ -147,17 +126,9 @@ $header-bgcolor: #263238;
 
               }
               li {
-                //cursor: pointer;
                 padding: 10px 60px;
               }
             }
-            span {
-              margin-left: 0px;
-              color: rgba(255, 255, 255, 0.75);
-
-            }
-            //height: 40px;
-
             &:hover {
               background-color: darken($header-bgcolor, 10%);
             }
@@ -171,12 +142,9 @@ $header-bgcolor: #263238;
             }
           }
           .navigation-header-icon {
-            padding: 0px 18px;
+            padding: 0 18px;
           }
-          //.big-icon {
-          //  padding: 0px 16px;
-          //  //font-size: 20px;
-          //}
+
           .navigation-header {
             padding: 10px 5px;
             color: rgba(255, 255, 255, 0.5);

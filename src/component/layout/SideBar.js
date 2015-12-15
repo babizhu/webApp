@@ -13,7 +13,15 @@ import  '../../css/layout/sidebar.scss'
 class SideBar extends Component {
 
     state = {
-        currentIndex:-1,
+
+        /**
+         * 当前被选中的大项
+         */
+        currentIndex: -1,
+        /**
+         * 当前大项下被选中的具体子菜单
+         */
+        currentSubMenuItemIndex: -1
     };
 
     /**
@@ -21,73 +29,30 @@ class SideBar extends Component {
      * @param index
      * @param clickOnChild 如果点击的是子节点,那么不应该修改index=-1,否则,点击子节点,会导致当前菜单无选项
      */
-    showSubMenu( index,clickOnChild = false ){
+    showSubMenu(index, iconMode) {
 
-
-        if( this.state.currentIndex === index && !clickOnChild ){
+        if( iconMode ){
+            return;
+        }
+        if( this.state.currentIndex === index ){
             index = -1;
         }
-        this.setState({currentIndex:index});
-        console.log('showSubMenu:' +index);
+        this.setState({currentIndex: index});
+        console.log('SideBar.showSubMenu()===:' + index);
     }
 
-
-    mini() {
-        //const el1 = ReactDom.findDOMNode(this.refs.mediaBody);
-        //const el2 = ReactDom.findDOMNode(this.refs.mediaRight);
-        //const els = [el1, el2];
-        //
-        //let isshow=""
-        //els.forEach(x=>{
-        //
-        //    if( x.style.display !== 'none'){
-        //        x.style.display = 'none';
-        //        isshow = false;
-        //    }else{
-        //        x.style.display ='table-cell';
-        //        isshow = true;
-        //    }
-        //});
-        //console.log(ReactDom.findDOMNode(this.refs.headerText1).style.display);
-        //if(isshow){
-        //    ReactDom.findDOMNode(this.refs.medias).style.padding = '20px';
-        //    ReactDom.findDOMNode(this.refs.mediaLeft).style.paddingRight = '10px';
-        //    ReactDom.findDOMNode(this.refs.headerText).style.display = '';
-        //    ReactDom.findDOMNode(this.refs.headerText1).style.display = '';
-        //    ReactDom.findDOMNode(this.refs.headerIcon).style.display = 'none';
-        //    let clsName = ReactDom.findDOMNode(this.refs.headerText1).className;
-        //    //clsName = clsName.substr(0, clsName.length - 9);
-        //    clsName = ReactDom.findDOMNode(this.refs.headerText2).className;
-        //    clsName = clsName.substr(0, clsName.length - 9);
-        //    clsName = ReactDom.findDOMNode(this.refs.headerText3).className;
-        //    //clsName = clsName.substr(0, clsName.length - 9);
-        //    //x.className = x.className.substr(0, x.className.length - 3);
-        //    //ReactDom.findDOMNode(this.refs.headerIcon1).className -= ' header-icon';
-        //    ReactDom.findDOMNode(this.refs.headerIcon1).style.fontSize = '';
-        //    ReactDom.findDOMNode(this.refs.headerIcon2).style.fontSize = '';
-        //    ReactDom.findDOMNode(this.refs.headerIcon3).style.fontSize = '';
-        //}else{
-        //    //console.log(x.style.display)
-        //    ReactDom.findDOMNode(this.refs.medias).style.padding = '24px 10px';
-        //    //ReactDom.findDOMNode(this.refs.medias).style.paddingTop = '';
-        //    ReactDom.findDOMNode(this.refs.mediaLeft).style.paddingRight = '0px';
-        //    ReactDom.findDOMNode(this.refs.headerText).style.display = 'none';
-        //    //ReactDom.findDOMNode(this.refs.headerText1).style.display = 'none';
-        //    //ReactDom.findDOMNode(this.refs.headerText1).className += ' miniMenu';
-        //    ReactDom.findDOMNode(this.refs.headerText2).className += ' miniMenu';
-        //    //ReactDom.findDOMNode(this.refs.headerText3).className += ' miniMenu';
-        //    ReactDom.findDOMNode(this.refs.headerIcon).style.display = 'table-cell';
-        //    //ReactDom.findDOMNode(this.refs.headerIcon1).className += ' header-icon';
-        //    ReactDom.findDOMNode(this.refs.headerIcon1).style.fontSize = '20px';
-        //    ReactDom.findDOMNode(this.refs.headerIcon2).style.fontSize = '20px';
-        //    ReactDom.findDOMNode(this.refs.headerIcon3).style.fontSize = '20px';
+    /**
+     * 点击具体子菜单后触发的动作，通常用于页面跳转或路由（单页面应用程序）
+     * @param subMenuItem
+     */
+    onClickSubMenuItem(subMenuItem,parent) {
 
 
-        //}
-        //this.state.miniMode = !this.state.miniMode;
-        this.setState({iconMode: !this.state.iconMode});
-
+        this.setState({currentSubMenuItemIndex: subMenuItem.index});
+        this.setState({currentIndex: parent.index});
+        console.log("当前点击的条目为 " +subMenuItem.text + " index=" + subMenuItem.index);
     }
+
 
     render() {
         let userItem = {
@@ -102,30 +67,33 @@ class SideBar extends Component {
                 {
                     icon: 'home',
                     text: '个人门户',
-                    index:1,
+                    index: 1
                 }, {
                     icon: 'desktop',
                     text: '行政管理',
-                    index:2,
+                    index: 2,
                     subMenu: [
                         {
                             icon: 'phone',
-                            text: '会议管理'
+                            text: '会议管理',
+                            index: 1
                         },
                         {
                             icon: 'book',
-                            text: '设备管理'
+                            text: '设备管理',
+                            index: 2
                         }
                     ]
                 },
                 {
                     icon: 'folder',
                     text: '基础管理',
-                    index:3,
+                    index: 3,
                     subMenu: [
                         {
                             icon: 'user',
-                            text: '用户管理'
+                            text: '用户管理',
+                            index: 3
                         }
                     ]
                 }
@@ -137,15 +105,17 @@ class SideBar extends Component {
                 {
                     icon: 'calendar',
                     text: '表单管理',
-                    index:4,
+                    index: 4,
                     subMenu: [
                         {
                             icon: 'phone',
-                            text: '基础数据'
+                            text: '基础数据',
+                            index: 4
                         },
                         {
                             icon: 'book',
-                            text: '我的表单'
+                            text: '我的表单',
+                            index: 5
                         }
                     ]
                 }
@@ -153,44 +123,47 @@ class SideBar extends Component {
         }];
 
         let {miniMode,iconMode,show} = this.props;
-        //let iconMode = this.props.iconMode;
         let index = 0;
 
         let widthValue = '';
-        let showValue= '';
-        if( miniMode ){
+        let showValue = '';
+        if (miniMode) {
             iconMode = false;
             widthValue = '100%';
-            if( show ){
+            if (show) {
                 showValue = 'block'
-            }else {
+            } else {
                 showValue = 'none';
             }
-        }else {
+        } else {
             showValue = 'block';
-            if( iconMode ){
+            if (iconMode) {
                 widthValue = 'auto';
-            }else {
-                widthValue='256px';
+            } else {
+                widthValue = '260px';
             }
         }
         return (
 
             <div className="sidebar" style={{width:widthValue, display:showValue}}>
                 <div className="sidebar-content">
-                    <SideBarUserItem itemData={userItem} iconMode={iconMode} />
+                    <SideBarUserItem itemData={userItem} iconMode={iconMode}/>
 
                     <div className="sidebar-category">
                         <div className="category-content no-padding">
                             <ul className="navigation-ul">
                                 {items.map(x => {
 
-                                    return <SideBarItem itemData={x} iconMode={iconMode} showSubMenu={this.showSubMenu.bind(this)}
-                                                        key={index++} currentIndex={this.state.currentIndex} />
+                                    return <SideBarItem itemData={x} key={index++}
+                                                        iconMode={iconMode}
+                                                        showSubMenu={this.showSubMenu.bind(this)}
+                                                        onClickSubMenuItem={this.onClickSubMenuItem.bind(this)}
+                                                        currentIndex={this.state.currentIndex}
+                                                        currentSubMenuItemIndex={this.state.currentSubMenuItemIndex}
+                                        />
                                 })}
 
-                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
                             </ul>
                         </div>
                     </div>

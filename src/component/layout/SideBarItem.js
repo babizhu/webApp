@@ -12,17 +12,18 @@ import '../../css/layout/sidebar.scss'
 class SideBarItem extends Component {
 
     render() {
-        //let itemData = this.props.itemData;
-        //let iconMode = this.props.iconMode;//是否仅显示图标模式
-        const {itemData,iconMode,currentIndex,showSubMenu} = this.props;
+
+        const {itemData, ...others} = this.props;
         const menu = itemData.menu;
+        const iconMode = this.props.iconMode;
+
         return (
             <span>
                 <li className="navigation-header">
                     <span  style={{display:iconMode ? 'none':''}}>{itemData.text}</span>
                     <Icon type={itemData.icon} className='navigation-header-icon' style={{display:!iconMode ? 'none':''}}/>
                 </li>
-                <SideBarMenu menuData={menu} iconMode={iconMode} currentIndex={currentIndex} showSubMenu={this.props.showSubMenu}/>
+                <SideBarMenu menuData={menu} {...others}/>
             </span>
         );
     }

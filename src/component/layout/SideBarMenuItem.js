@@ -11,50 +11,23 @@ import SideBarSubMenu from './SideBarSubMenu';
 class SideBarMenuItem extends Component {
 
     state = {
-        showSubMenu:false,//此开关专用于鼠标滑过导致 子菜单的现实与否
-        //arrowDirect: 'right',
-        //iconMode:false,
-        //showSubMenuDown: false,//子菜单显示在下方
-        //showSubMenuRight:false,//icon模式下，子菜单显示在右边
+        showSubMenu: false,//此开关专用于鼠标滑过导致 子菜单的显示与否
+
 
     };
-    //showSubMenu() {
-    //    //let arrowDirect = this.state.arrowDirect ==='right' ? 'down' : 'right';
-    //    //this.setState({showSubMenuDown:!this.state.showSubMenuDown, arrowDirect:arrowDirect})
-    //    let menuItem = this.props.item;
-    //    this.props.showSubMenu(menuItem.index);
-    //}
-    //
-    //isShowSubMenu() {
-    //    //if (this.menuItem.subMenu) {
-    //    //    let arrowDirect = this.state.arrowDirect ==='right' ? 'down' : 'right';
-    //    //    this.setState({showSubMenu:!this.state.showSubMenu, arrowDirect:arrowDirect})
-    //    //    ////let display = ReactDom.findDOMNode(this.refs.subMenu).style.display;
-    //    //    //if (display === 'none') {
-    //    //    //    //ReactDom.findDOMNode(this.refs.subMenu).style.display = '';
-    //    //    //    this.setState({arrowDirect: 'down'})
-    //    //    //} else {
-    //    //    //    ReactDom.findDOMNode(this.refs.subMenu).style.display = 'none';
-    //    //    //    this.setState({arrowDirect: 'right'})
-    //    //    //}
-    //    //}
-    //    return this.state.showSubMenuDown || this.state.showSubMenuRight
-    //}
 
-    handlerMouseOver() {
-        //ReactDom.findDOMNode(this.refs.test).style.display = "inline";
-        //if (this.state.iconMode) {
-        //}
-        this.setState({showSubMenu: true})
+    handlerMouseOver(iconMode) {
+        if (iconMode) {
+
+            this.setState({showSubMenu: true})
+        }
     }
 
     // 鼠标移出
-    handlerMouseOut() {
-        //ReactDom.findDOMNode(this.refs.test).style.display = "none";
-        //if (this.state.iconMode) {
-        //}
-        this.setState({showSubMenu: false})
-
+    handlerMouseOut(iconMode) {
+        if (iconMode) {
+            this.setState({showSubMenu: false})
+        }
     }
 
     /**
@@ -66,18 +39,16 @@ class SideBarMenuItem extends Component {
      */
     buildArrowIcon(iconMode, hasSubMenu, isSelected) {
 
-        if (iconMode) {
+        if (iconMode || !hasSubMenu) {
             return '';
         }
-        if (hasSubMenu) {
-            if (isSelected) {
-                return 'down';
-            } else {
-                return 'right';
-            }
+
+        if (isSelected) {
+            return 'down';
         } else {
-            return '';
+            return 'right';
         }
+
 
     }
 
@@ -89,31 +60,31 @@ class SideBarMenuItem extends Component {
      * @param showSubMenu
      * @returns {*}
      */
-    buildSubMenu(iconMode, hasSubMenu, isSelected,showSubMenu) {
+    buildSubMenu(iconMode, hasSubMenu, isSelected, showSubMenu) {
 
         if (!hasSubMenu) {
             return ''
         }
-
         let subMenuUlClassName = "";
         let show = false;
 
-        if( isSelected && !iconMode ){
-            show = true;
-        }
-
-        if( iconMode ){
+        //如果是图标模式，子菜单是否显示取决于鼠标有没有划过本菜单
+        if (iconMode) {
             subMenuUlClassName = 'miniSubMenu';
             show = showSubMenu;
+        } else {//普通模式下，子菜单是否显示则取决于是否被选中
+
+            if (isSelected) {
+                show = true;
+            }
         }
 
-        return {show:show,subMenuUlClassName:subMenuUlClassName}
-
+        return {show: show, subMenuUlClassName: subMenuUlClassName}
     }
 
     render() {
 
-        const {iconMode,currentIndex,showSubMenu,item} = this.props;
+        const {iconMode,currentIndex,showSubMenu,item,onClickSubMenuItem,currentSubMenuItemIndex} = this.props;
 
         let menuItem = item;
         let hasSubMenu = menuItem.subMenu ? true : false;
@@ -129,18 +100,21 @@ class SideBarMenuItem extends Component {
         }
 
 
-        let subMenuCfg = this.buildSubMenu(iconMode,hasSubMenu,isSelected,this.state.showSubMenu );
+        let subMenuCfg = this.buildSubMenu(iconMode, hasSubMenu, isSelected, this.state.showSubMenu);
         let subMenu = '';
-        if( subMenuCfg !== '' ){
+        if (subMenuCfg !== '') {
             let index = 0;
             subMenu =
                 <ul className={subMenuCfg.subMenuUlClassName} style={{display:subMenuCfg.show?'':'none'}}>
                     {menuItem.subMenu.map(x => {
 
-                        return <SideBarSubMenu item={x} iconMode={iconMode}
-                                               key={index++} parent={menuItem}
+                        return <SideBarSubMenu className={iconMode ? 'miniMenu':''} item={x} key={x.index}
+                                               iconMode={iconMode}
+                                               parent={menuItem}
                                                showSubMenu={showSubMenu}
-                                               className={iconMode ? 'miniMenu':''}/>
+                                               onClickSubMenuItem={onClickSubMenuItem}
+                                               currentSubMenuItemIndex={currentSubMenuItemIndex}
+                            />
                         //return <li key={index++}>{x.text}</li>
                     })}
 
@@ -148,13 +122,13 @@ class SideBarMenuItem extends Component {
         }
 
         let liClassName = "navigation-item";
-        if( isSelected ){
+        if (isSelected) {
             liClassName += ' active';
         }
         return (
-            <li className={liClassName} onClick={ showSubMenu.bind(this,menuItem.index)}
-                onMouseOver={this.handlerMouseOver.bind(this)}
-                onMouseOut={this.handlerMouseOut.bind(this)}>
+            <li className={liClassName} onClick={ showSubMenu.bind(this,menuItem.index, iconMode)}
+                onMouseOver={this.handlerMouseOver.bind(this,iconMode)}
+                onMouseOut={this.handlerMouseOut.bind(this,iconMode)}>
                 <Icon type={menuItem.icon}/>
                 <span className={iconMode ? 'miniMenu':''}
                       style={{display:subMenuCfg.show || !iconMode || ( this.state.showSubMenu && !hasSubMenu ) ? '':'none'}}>

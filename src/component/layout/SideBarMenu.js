@@ -8,7 +8,7 @@ import SideBarMenuItem from './SideBarMenuItem';
 class SideBarMenu extends Component {
 
     render() {
-        const {iconMode,currentIndex,showSubMenu,menuData} = this.props;
+        const {menuData, ...others} = this.props;
         //menu.map(x=> {
         //    console.log(x);
         //    return <SideBarMenuItem />
@@ -17,11 +17,9 @@ class SideBarMenu extends Component {
         let index = 0;
         return (
             <span>
-
                 {menuData.map(x => {
 
-                    return <SideBarMenuItem item={x} iconMode={iconMode} key={index++} currentIndex={currentIndex}
-                                            showSubMenu={showSubMenu}/>
+                    return <SideBarMenuItem item={x} key={index++} {...others}/>
                 })}
             </span>
 
