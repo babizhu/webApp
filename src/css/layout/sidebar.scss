@@ -1,4 +1,5 @@
 $header-bgcolor: #263238;
+$font-color: #fff;
 
 //@media (max-width: 768px) {
 //  .sidebar {
@@ -13,14 +14,16 @@ $header-bgcolor: #263238;
 //    width: 256px;
 //  }
 //}
-
+a{
+  color: $font-color;
+}
 .sidebar {
   background-color: $header-bgcolor;
   .sidebar-content {
     font-size: 13px;
     display: table;
 
-    color: #fff;
+    color: $font-color;
     position: relative;
     //line-height: 2;
     .media {

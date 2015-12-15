@@ -81,9 +81,8 @@ class TestSideBar extends Component {
                 <div style={{float:'left'}}>
                     <SideBar iconMode={this.state.iconMode} show={this.state.show} miniMode={this.state.miniMode}/>
                 </div>
-                <div style={{float:'left',padding:'10px',background:'white'}}><App /></div>
+                <div style={{float:'left',padding:'10px',background:'white'}}>{this.props.children}</div>
             </div>
-
         );
     }
 }

@@ -4,15 +4,12 @@
  */
 import React, { Component } from 'react';
 
-
+import { Link } from 'react-router'
 class SideBarSubMenu extends Component {
 
     click(item, parent, onClickSubMenuItem, e) {
 
         if (e && e.stopPropagation) {
-
-            // 因此它支持W3C的stopPropagation()方法
-
             e.stopPropagation();
             e.preventDefault();
 
@@ -37,22 +34,22 @@ class SideBarSubMenu extends Component {
         }
 
 
-            return (
-                <li className={liClassName}
-                    onClick={this.click.bind(this,item,parent,onClickSubMenuItem)}>
-                    {item.text}
-                </li>
-            );
-        }
+        return (
+            <li className={liClassName}
+                onClick={this.click.bind(this,item,parent,onClickSubMenuItem)}>
+
+                <Link to={item.component? item.component : '/'}>
+                    <div>
+                        {item.text}
+                    </div>
+                </Link>
+
+            </li>
+        );
     }
+}
 
-    SideBarSubMenu
-.
-    propTypes = {};
-    SideBarSubMenu
-.
-    defaultProps = {};
+SideBarSubMenu.propTypes = {};
+SideBarSubMenu.defaultProps = {};
 
-        export
-        default
-    SideBarSubMenu;
+export default SideBarSubMenu;

@@ -50,7 +50,7 @@ class SideBar extends Component {
 
         this.setState({currentSubMenuItemIndex: subMenuItem.index});
         this.setState({currentIndex: parent.index});
-        console.log("当前点击的条目为 " +subMenuItem.text + " index=" + subMenuItem.index);
+        console.log("当前点击的条目为 " +subMenuItem.text + " index=" + subMenuItem.index + " 组件=" + subMenuItem.component);
     }
 
 
@@ -76,12 +76,15 @@ class SideBar extends Component {
                         {
                             icon: 'phone',
                             text: '会议管理',
-                            index: 1
+                            index: 1,
+                            component: 'app'
                         },
                         {
                             icon: 'book',
                             text: '设备管理',
-                            index: 2
+                            index: 2,
+                            component: 'flex'
+
                         }
                     ]
                 },
@@ -93,7 +96,9 @@ class SideBar extends Component {
                         {
                             icon: 'user',
                             text: '用户管理',
-                            index: 3
+                            index: 3,
+                            component: 'nav'
+
                         }
                     ]
                 }
