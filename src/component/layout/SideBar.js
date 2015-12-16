@@ -62,7 +62,7 @@ class SideBar extends Component {
         };
         let items = [{
             text: '主菜单',
-            icon: 'bars',
+            icon: 'ellipsis',
             menu: [
                 {
                     icon: 'home',
@@ -105,7 +105,7 @@ class SideBar extends Component {
             ]
         }, {
             text: '基础数据',
-            icon: 'bars',
+            icon: 'ellipsis',
             menu: [
                 {
                     icon: 'calendar',
@@ -121,6 +121,24 @@ class SideBar extends Component {
                             icon: 'book',
                             text: '我的表单',
                             index: 5
+                        }
+                    ]
+                }
+            ]
+        }, {
+            text: '杂项设置',
+            icon: 'ellipsis',
+            menu: [
+                {
+                    icon: 'shrink',
+                    text: '测试模块',
+                    index: 5,
+                    subMenu: [
+                        {
+                            icon: 'phone',
+                            text: 'assign 测试',
+                            index: 6,
+                            component: 'test'
                         }
                     ]
                 }

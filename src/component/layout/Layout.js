@@ -1,62 +1,87 @@
 /**
- * web app经典布局
- * Created by liu_k on 2015/11/18.
+ * Created by liu_k on 2015/12/10.
  */
 
 import React, { Component } from 'react';
-import ReactDom from 'react-dom';
-import {Affix,Row, Col } from 'antd';
-//import ContentContainer from './ContentContainer';
+import SideBar from './SideBar';
+import Header from './Header';
+import App from '../../App.js';
+
 
 class Layout extends Component {
+
+
+    constructor() {
+        super();
+        this.currentModeIsMini = '';
+        this.prevModeIsMini = ''
+        //this._resize_mixin_callback();
+    }
+
     componentDidMount() {
-        this.updateDimensions();
-        window.addEventListener("resize", this.updateDimensions.bind(this));
-        //console.log(document.body.clientHeight )
-        //ReactDom.findDOMNode(this.refs.container).
-
+        window.addEventListener('resize', this._resize_mixin_callback.bind(this));
+        this._resize_mixin_callback();
     }
 
-    updateDimensions(){
-        console.log("updateDimensions");
-        let winHeight = document.body.clientHeight;
-        let contentHeight = winHeight - 200;
-        ReactDom.findDOMNode(this.refs.content).style.height = contentHeight + "px";
-    }
     componentWillUnmount() {
-        window.removeEventListener("resize", this.updateDimensions.bind(this));
+        window.removeEventListener('resize', this._resize_mixin_callback.bind(this));
     }
+
+    /**
+     * 出于性能考虑,只有当前的状态和之前的状态不一样,才重新设置模式
+     * @private
+     */
+    _resize_mixin_callback() {
+
+        const screenWidth = document.documentElement.clientWidth;
+        if (screenWidth < 768) {
+            this.currentModeIsMini = true;
+        } else {
+            this.currentModeIsMini = false;
+        }
+        if (this.currentModeIsMini != this.prevModeIsMini) {
+
+            this.setState({miniMode: this.currentModeIsMini});
+            //alert('屏幕状态发生改变了');
+        }
+        this.prevModeIsMini = this.currentModeIsMini;
+    }
+
+    /**
+     * 设置sidebar是否进入icon模式
+     */
+    changeSideBarMode() {
+        this.setState({iconMode: !this.state.iconMode});
+    }
+
+    //在mini模式下，设置sidebar的显示与否
+    showSideBarInMiniMode() {
+        this.setState({show: !this.state.show});
+
+
+    }
+
+
+    state = {
+        iconMode: false,
+        show: true,
+        miniMode: false
+    };
+
+
     render() {
 
-        let container = {
-            width: "100%",
-            height: "100%"
-        }
-        let header = {
-            background: "greenyellow",
-            height: "100px"
-        }
-        let content = {
-            background: "hotpink",
-            //flex: 1,
-            height: "100%",
-        }
-        let footer = {
-            background: "deepskyblue",
-            height: "100px"
-        }
-
         return (
-            <div style={container} ref='container'>
+            <div style={{background:'red'}}>
 
+                <Header changeSideBarMode={this.changeSideBarMode.bind(this)}
+                        showSideBarInMiniMode={this.showSideBarInMiniMode.bind(this)}
+                />
 
-                <Col type="flex">
-
-                    <Affix><Row style={header}>header1</Row></Affix>
-                    <Row style={content} ref='content'>content</Row>
-                    <Row style={footer}>footer</Row>
-                </Col>
-
+                <div style={{float:'left'}}>
+                    <SideBar iconMode={this.state.iconMode} show={this.state.show} miniMode={this.state.miniMode}/>
+                </div>
+                <div style={{float:'left',padding:'10px',background:'white'}}>{this.props.children}</div>
             </div>
         );
     }
