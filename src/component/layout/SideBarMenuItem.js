@@ -82,13 +82,15 @@ class SideBarMenuItem extends Component {
         return {show: show, subMenuUlClassName: subMenuUlClassName}
     }
 
+
     render() {
 
         const {iconMode,currentIndex,showSubMenu,item,onClickSubMenuItem,currentSubMenuItemIndex} = this.props;
 
         let menuItem = item;
         let hasSubMenu = menuItem.subMenu ? true : false;
-        let isSelected = currentIndex === menuItem.index ? true : false;
+
+        let isSelected = currentIndex.indexOf( menuItem.index ) !== -1 ? true : false;
 
         let arrowIcon = this.buildArrowIcon(iconMode, hasSubMenu, isSelected);
         let arrow = '';
@@ -125,8 +127,9 @@ class SideBarMenuItem extends Component {
         if (isSelected) {
             liClassName += ' active';
         }
+        let clickOnChild = false;
         return (
-            <li className={liClassName} onClick={ showSubMenu.bind(this,menuItem.index, iconMode)}
+            <li className={liClassName} onClick={ showSubMenu.bind(this,menuItem.index,clickOnChild)}
                 onMouseOver={this.handlerMouseOver.bind(this,iconMode)}
                 onMouseOut={this.handlerMouseOut.bind(this,iconMode)}>
                 <Icon type={menuItem.icon}/>

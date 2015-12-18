@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router'
 class SideBarSubMenu extends Component {
 
-    click(item, parent, onClickSubMenuItem, e) {
+    click(item, parent, onClickSubMenuItem, iconMode, e) {
 
         if (e && e.stopPropagation) {
             e.stopPropagation();
@@ -19,13 +19,13 @@ class SideBarSubMenu extends Component {
         }
         let clickOnChild = true;
         //showSubMenu(parent.index, clickOnChild);
-        onClickSubMenuItem(item, parent);
+        onClickSubMenuItem(item, parent,iconMode);
         //this.props.showSubMenu(1);
     }
 
 
     render() {
-        const { item,parent,currentSubMenuItemIndex,onClickSubMenuItem } = this.props;
+        const { item,parent,currentSubMenuItemIndex,onClickSubMenuItem,iconMode } = this.props;
         let liClassName = "";
         //console.log(item.text + "的index=" + item.index +" currentSubMenuItemIndex=" + currentSubMenuItemIndex);
         if (item.index === currentSubMenuItemIndex) {
@@ -36,7 +36,7 @@ class SideBarSubMenu extends Component {
 
         return (
             <li className={liClassName}
-                onClick={this.click.bind(this,item,parent,onClickSubMenuItem)}>
+                onClick={this.click.bind(this,item,parent,onClickSubMenuItem,iconMode)}>
 
                 <Link to={item.component? item.component : '/'}>
                     <div>

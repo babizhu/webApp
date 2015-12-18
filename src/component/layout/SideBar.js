@@ -1,6 +1,22 @@
 /**
  * 可伸缩，自适应边栏
- * Created by liu_k on 2015/12/3.
+ *
+ * 此边栏有两种显示模式
+ *  iconMode    只显示图标
+ *  normal      正常模式
+ *
+ * 另外还有个miniMode的显示模式，用于处理此sidebar的显示宽度，当屏幕宽度太小，
+ * 如手机等设备时，需要强制显示模式为正常模式，并100%屏幕宽度
+ *
+ *  此边栏有两种选择模式
+ *  one         每次只允许展开一个子菜单
+ *  muti        允许展开多个子菜单
+ *
+ *  问题：
+ *  当显示模式为iconMode的时候，如果采用muti的选择模式，会感觉有点奇怪（可模拟自行测试），目前未处理
+ *
+ *
+ * Created by liu_kun on 2015/12/3.
  */
 import React, { Component } from 'react';
 import ReactDom from "react-dom"
@@ -12,33 +28,55 @@ import  '../../css/layout/sidebar.scss'
 
 class SideBar extends Component {
 
+
+    /**
+     * 缺省情况下，采用正常显示模式加上单选择模式
+     */
+    constructor() {
+        super();
+
+
+    }
+
     state = {
 
         /**
          * 当前被选中的大项
          */
-        currentIndex: -1,
+        currentIndex: [],
         /**
          * 当前大项下被选中的具体子菜单
          */
-        currentSubMenuItemIndex: -1
+        currentSubMenuItemIndex: -1,
+        selectMode : 'one',//muti,one
     };
 
     /**
-     * 设置该显示那个显示子菜单
+     * 设置该显示那个显示子菜单，这里有两种模式
+     * 1、每次仅显示一个菜单展开        one
+     * 2、每次可显示多个菜单展开        muti
+     *
      * @param index
-     * @param clickOnChild 如果点击的是子节点,那么不应该修改index=-1,否则,点击子节点,会导致当前菜单无选项
+     * @param clickOnChild 如果点击的是子节点,不应该收起父菜单
      */
-    showSubMenu(index, iconMode) {
+    showSubMenu(index, clickOnChild = false ) {
 
-        if( iconMode ){
-            return;
+        let currentMenuArr = this.state.currentIndex;
+        if(this.state.selectMode === 'one'  ){
+            currentMenuArr.splice( 0, currentMenuArr.length, index );
+        }else {
+            //console.log('clickOnChild='+ clickOnChild)
+            let pos = currentMenuArr.indexOf(index);
+            if ( pos !== -1 ) {
+                if( clickOnChild === false ){
+
+                    currentMenuArr.splice(pos, 1);
+                }
+            } else {
+                currentMenuArr.push(index);
+            }
         }
-        if( this.state.currentIndex === index ){
-            index = -1;
-        }
-        this.setState({currentIndex: index});
-        console.log('SideBar.showSubMenu()===:' + index);
+        this.setState({currentIndex: currentMenuArr});
     }
 
     /**
@@ -49,7 +87,7 @@ class SideBar extends Component {
 
 
         this.setState({currentSubMenuItemIndex: subMenuItem.index});
-        this.setState({currentIndex: parent.index});
+        this.showSubMenu(parent.index, true);
         console.log("当前点击的条目为 " +subMenuItem.text + " index=" + subMenuItem.index + " 组件=" + subMenuItem.component);
     }
 
@@ -145,8 +183,8 @@ class SideBar extends Component {
             ]
         }];
 
-        let {miniMode,iconMode,show} = this.props;
-        let index = 0;
+        let {miniMode,iconMode,show,selectMode} = this.props;
+        this.state.selectMode = selectMode;
 
         let widthValue = '';
         let showValue = '';
@@ -166,6 +204,7 @@ class SideBar extends Component {
                 widthValue = '260px';
             }
         }
+        let index = 0;
         return (
 
             <div className="sidebar" style={{width:widthValue, display:showValue}}>

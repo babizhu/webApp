@@ -65,7 +65,8 @@ class Layout extends Component {
     state = {
         iconMode: false,
         show: true,
-        miniMode: false
+        miniMode: false,
+        selectMode :'one',//one muti
     };
 
 
@@ -79,7 +80,11 @@ class Layout extends Component {
                 />
 
                 <div style={{float:'left'}}>
-                    <SideBar iconMode={this.state.iconMode} show={this.state.show} miniMode={this.state.miniMode}/>
+                    <SideBar iconMode={this.state.iconMode}
+                             show={this.state.show}
+                             miniMode={this.state.miniMode}
+                             selectMode = {this.state.selectMode}
+                        />
                 </div>
                 <div style={{float:'left',padding:'10px',background:'white'}}>{this.props.children}</div>
             </div>
