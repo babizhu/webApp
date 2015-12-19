@@ -1,66 +1,48 @@
 /**
- * test，用于各种测试代码
- * Created by liu_k on 2015/12/16.
+ * Created by liu_k on 2015/11/12.
+ *
  */
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import todoApp from '../todos/reducers';
+import TodoAppContainer from '../todos/todoAppContainer'
 
-const initialState = {
-    visibilityFilter: 'aaaa',
-    todos: []
-};
-class Test extends Component {
+let store = createStore(todoApp);
 
-    todoApp(state = initialState) {
-        let data = {
-            name:'lk',
-            age:56
-        };
-        console.log( 'data.age=' + data.age );
-        data.age = 100;
-        console.log( 'data.age=' + data.age );
-
-        let data1 = data;
-        data1.age = 200;
-        console.log( 'data.age=' + data.age );
-        let data2 = {...data};
-        console.log( 'data2.age=' + data2.age );
-        data2.age = 300;
-        console.log( 'data2.age=' + data2.age + 'and data.age=' + data.age );
-
-        {
-            {
-
-                if (false)
-                    return Object.assign({}, state, {
-                        visibilityFilter: 'abcd',
-                        test: true,
-                    });
-            }
-        }
-
-        return Object.assign({}, state, {
-            todos: [...state.todos, {
-                text: '任务1',
-                completed: false
-            }]
-        });
-
+export default class Test extends Component {
+    constructor() {
+        super();
     }
+
 
     render() {
+//        ;
+//
+//// 打印初始状态
+//        console.log(store.getState());
+//
+//// 监听 state 更新时，打印日志
+//        let unsubscribe = store.subscribe(() =>
+//            console.log(store.getState())
+//        );
+//
+//// 发起一系列 action
+//        store.dispatch(addTodo('Learn about actions'));
+//        store.dispatch(addTodo('Learn about reducers'));
+//        store.dispatch(addTodo('Learn about store'));
+//        store.dispatch(completeTodo(0));
+//        store.dispatch(completeTodo(1));
+//        store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED));
+//
+//// 停止监听 state 更新
+//        unsubscribe();
 
-        let result = this.todoApp();
-        console.log(result);
         return (
-            <div>
+        <Provider store={store}>
+           <TodoAppContainer />
+        </Provider>
 
-                <h1>aa</h1>
-            </div>
-        );
+        )
     }
 }
-
-Test.propTypes = {};
-Test.defaultProps = {};
-
-export default Test;

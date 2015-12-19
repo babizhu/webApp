@@ -66,7 +66,7 @@ class Layout extends Component {
         iconMode: false,
         show: true,
         miniMode: false,
-        selectMode :'one',//one muti
+        selectMode :'muti',//one muti
     };
 
 
