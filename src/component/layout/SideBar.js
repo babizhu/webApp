@@ -93,7 +93,7 @@ class SideBar extends Component {
 
 
     render() {
-        let userItem = {
+        let userData = {
             photoUrl: 'img/face11.jpg',
             name: '刘老爷',
             address: '中国 重庆市 南岸区'
@@ -209,7 +209,7 @@ class SideBar extends Component {
 
             <div className="sidebar" style={{width:widthValue, display:showValue}}>
                 <div className="sidebar-content">
-                    <SideBarUserItem itemData={userItem} iconMode={iconMode}/>
+                    <SideBarUserItem userData={userData} iconMode={iconMode}/>
 
                     <div className="sidebar-category">
                         <div className="category-content no-padding">

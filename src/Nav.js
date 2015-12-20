@@ -35,7 +35,7 @@ class Nav extends React.Component {
         }
         return (
             <div style={nav}>
-                <Link to='/app' > 应用程序 </Link>
+                <Link to='/app'> 应用程序 </Link>
                 <Icon type="link"
                       style={{margin:'5px',fontSize:'25px',background:'green',color:'white',padding:'7px'}}/>
                 <Icon type="step-backward"

@@ -9,20 +9,20 @@ import Nav from './Nav.js'
 import Flex from './Flex.js'
 import Test from './component/misc/Test'
 class Main extends Component {
-  render() {
-      return(
-          <Router>
-              <Route path='/' component={Layout}>
+    render() {
+        return (
+            <Router>
+                <Route path='/' component={Layout}>
 
-                  <Route path="app" component={App} />
-                  <Route path="nav" component={Nav} />
-                  <Route path="flex" component={Flex} />
-                  <Route path="test" component={Test} />
-              </Route>
-          </Router>
+                    <Route path="app" component={App}/>
+                    <Route path="nav" component={Nav}/>
+                    <Route path="flex" component={Flex}/>
+                    <Route path="test" component={Test}/>
+                </Route>
+            </Router>
 
-      );
-  }
+        );
+    }
 }
 
 Main.propTypes = {};

@@ -17,15 +17,17 @@ class Flex extends Component {
 
     }
 
-    updateDimensions(){
+    updateDimensions() {
         console.log("updateDimensions");
         let winHeight = document.body.clientHeight;
         let contentHeight = winHeight - 200;
         //ReactDom.findDOMNode(this.refs.content).style.height = contentHeight + "px";
     }
+
     componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
-}
+        window.removeEventListener("resize", this.updateDimensions.bind(this));
+    }
+
     render() {
 
         let container = {

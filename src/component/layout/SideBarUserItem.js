@@ -8,11 +8,13 @@ import styles from '../../css/layout/sidebar.scss'
 
 class SideBarUserItem extends Component {
     render() {
-        let user = this.props.itemData;
-        let iconMode = this.props.iconMode;//是否仅显示图标模式
+        let{ userData,iconMode} = this.props;
+        //let user = this.props.userData;
+        //let iconMode = this.props.iconMode;//是否仅显示图标模式
         let mediaStyle = {
             padding: '20px'
         };
+
         let mediaLeftStyle = {
             paddingRight: '10px'
         };
@@ -37,14 +39,14 @@ class SideBarUserItem extends Component {
                 <div className="category-content">
                     <div className="media" style={mediaStyle}>
                         <div className="media-left" style={mediaLeftStyle}>
-                            <img src={user.photoUrl} className="img-circle img-sm" alt=""/>
+                            <img src={userData.photoUrl} className="img-circle img-sm" alt=""/>
                         </div>
 
                         <div className="media-body" ref='mediaBody' style={mediaShow}>
-                            <span>{user.name}</span>
+                            <span>{userData.name}</span>
 
                             <div className="text-size-mini">
-                                <Icon type="environment-o"/> &nbsp;{user.address}
+                                <Icon type="environment-o"/> &nbsp;{userData.address}
                             </div>
                         </div>
 

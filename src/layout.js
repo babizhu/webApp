@@ -12,7 +12,7 @@ export default class Layout extends Component {
         let container = {
             display: '-webkit-flex',
             'display': 'flex',
-            'flex-flow':'column',
+            'flex-flow': 'column',
 
             'max-width': '1000px',
             height: '100%',
@@ -22,7 +22,7 @@ export default class Layout extends Component {
         let header = {
 
             background: 'deepskyblue',
-            height:'50px',
+            height: '50px',
 
             background: 'hotpink'
         }
@@ -35,8 +35,6 @@ export default class Layout extends Component {
             height: '100%',
             margin: 'auto',
         }
-
-
 
 
         let main = {
@@ -91,18 +89,18 @@ export default class Layout extends Component {
         //    </div>
 
 
-            //<div style={left}>left
-            //</div>
-            //
-            //<section style={main}>
-            //    <h1>Three column layout example</h1>
-            //
-            //    <p>Flexbox makes a layout like this trivially easy. No messing about with floats, clearing
-            //        or precise positioning!</p>
-            //</section>
-            //
-            //<div style={right}>right
-            //</div>
+        //<div style={left}>left
+        //</div>
+        //
+        //<section style={main}>
+        //    <h1>Three column layout example</h1>
+        //
+        //    <p>Flexbox makes a layout like this trivially easy. No messing about with floats, clearing
+        //        or precise positioning!</p>
+        //</section>
+        //
+        //<div style={right}>right
+        //</div>
         //)
     }
 }

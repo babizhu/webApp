@@ -60,8 +60,8 @@ class Flex extends React.Component {
             <div style={box}>
                 <div style={header}>header</div>
                 <div style={contentBody}>
-                    
-                        < Nav />
+
+                    < Nav />
 
                     <div style={content}><App /></div>
 

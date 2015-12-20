@@ -39,12 +39,12 @@ export default class IconButton extends Component {
         let textStyle = {
             fontSize: '10px',
             textAlign: 'center',
-            maginTop:'10px'
+            maginTop: '10px'
             //padding: '10px',
 
         }
-        if( this.props.size == null ){
-            iconStyle.fontSize = iconStyle*0.5;
+        if (this.props.size == null) {
+            iconStyle.fontSize = iconStyle * 0.5;
         }
         iconStyle.fontSize += 'px';
 
@@ -52,14 +52,14 @@ export default class IconButton extends Component {
 
 
 
-                <Icon type={this.props.type} onMouseOver={this.handlerMouseOver.bind(this)}
-                      onMouseOut={this.handlerMouseOut.bind(this)} style={iconStyle} onClick={this.props.onClick}
+            <Icon type={this.props.type} onMouseOver={this.handlerMouseOver.bind(this)}
+                  onMouseOut={this.handlerMouseOut.bind(this)} style={iconStyle} onClick={this.props.onClick}
 
-                    >
+            >
 
 
-            <div style={textStyle}>{this.props.text}</div>
-</Icon>
+                <div style={textStyle}>{this.props.text}</div>
+            </Icon>
 
 
         );

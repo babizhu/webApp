@@ -46,7 +46,7 @@ export default class App extends Component {
             'background': 'rgba(75, 184, 255, 0.7)',
         }
 
-        const props = {a:3,b:4,d:5};
+        const props = {a: 3, b: 4, d: 5};
         const {a, ...others} = props;
         //console.log( others );
 
@@ -56,7 +56,7 @@ export default class App extends Component {
                 <div>
                     <Datepicker />
                     <Timepicker defaultValue="12:08:23"/>
-               
+
                 </div>
 
                 <div style={padStyle}>
@@ -78,10 +78,10 @@ export default class App extends Component {
                     <Icon type="question" style={iconStyle}/>
                 </div>
                 <div style={padStyle}>
-                    <IconButton text = "链接" type="question" onClick={openNotificationWithIcon('success')} />
+                    <IconButton text="链接" type="question" onClick={openNotificationWithIcon('success')}/>
                 </div>
 
-                <Icon type="step-backward" />
+                <Icon type="step-backward"/>
 
 
             </div>
