@@ -6,7 +6,7 @@ import { combineReducers } from 'redux'
 import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from './actions'
 const { SHOW_ALL } = VisibilityFilters;
 
-function visibilityFilter(state = SHOW_ALL, action) {
+function visibilityFilter(state = SHOW_ALL, action = null) {
     switch (action.type) {
         case SET_VISIBILITY_FILTER:
             return action.filter;
@@ -15,16 +15,20 @@ function visibilityFilter(state = SHOW_ALL, action) {
     }
 }
 
-function todos(state = [], action) {
+function todos(state = [], action = null) {
     switch (action.type) {
         case ADD_TODO:
-            return [
+            console.log("run empty argument method ADD_TODO (action.text)= " + action.text );
+            console.log( "state.length = " + state.length );
+            let ret = [
                 ...state,
                 {
                     text: action.text,
                     completed: false
                 }
             ];
+            console.log( "ret.length = " + ret.length );
+            return ret;
         case COMPLETE_TODO:
             return [
                 ...state.slice(0, action.index),

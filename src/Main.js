@@ -20,7 +20,6 @@ class Main extends Component {
                     <Route path="test" component={Test}/>
                 </Route>
             </Router>
-
         );
     }
 }

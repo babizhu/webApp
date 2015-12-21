@@ -120,7 +120,18 @@ class Footer extends Component {
 }
 
 class TodoAppContainer extends Component {
+
     render() {
+        var curriedAdd = function(a) {
+            return function(b) {
+                return a + b;
+            };
+        };
+
+        var addTen = curriedAdd(10);
+        let result = addTen(10); //20
+        console.log( 'result = ' + result );
+
         // 通过调用 connect() 注入:
         const { dispatch, visibleTodos, visibilityFilter } = this.props;
         return (

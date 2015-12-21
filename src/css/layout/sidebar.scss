@@ -1,4 +1,5 @@
 $header-bgcolor: #263238;
+$active-bgcolor: #26a69a;
 $font-color: #fff;
 
 //@media (max-width: 768px) {
@@ -14,10 +15,12 @@ $font-color: #fff;
 //    width: 256px;
 //  }
 //}
-a{
-  color: $font-color;
-}
+
 .sidebar {
+  a {
+    color: $font-color;
+  }
+
   background-color: $header-bgcolor;
   .sidebar-content {
     font-size: 13px;
@@ -55,11 +58,11 @@ a{
         padding-left: 20px;
       }
     }
-    .subItemActive{
-      background-color: darken(#263238,5%) !important;
+    .subItemActive {
+      background-color: darken($header-bgcolor, 5%) !important;
     }
     .active {
-      background-color: #26a69a !important;
+      background-color: $active-bgcolor !important;
     }
     .sidebar-category {
       .category-content {
@@ -76,7 +79,7 @@ a{
               position: absolute;
               top: 0;
               right: -260px;
-              background-color: #26a69a;
+              background-color: $active-bgcolor;
               border-color: rgb(38, 166, 154);
               //border-right-color: rgb(38, 166, 154);
               //border-bottom-color: rgb(38, 166, 154);
@@ -97,7 +100,7 @@ a{
                 border-top: 5px solid transparent;
                 border-bottom: 5px solid transparent;
                 border-right: 5px solid;
-                border-right-color: inherit;
+                border-right-color: inherit;//不知道为什么不能和border-right合并，一合并，本css的目的：小三角就没有了
                 position: absolute;
                 left: -5px;
                 top: 50%;
@@ -112,9 +115,9 @@ a{
               text-align: left;
               //color: #fff;
               //border-top-right-radius: 3px;
-              border-left: 1px solid rgba(255,255,255,0.1);
+              border-left: 1px solid rgba(255, 255, 255, 0.1);
               border-radius: 0 0 3px 0;
-              li{
+              li {
                 padding: 11px 30px;
                 margin: 5px 0;
               }
